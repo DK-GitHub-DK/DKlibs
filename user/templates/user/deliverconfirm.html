@@ -1,0 +1,30 @@
+{% extends 'user/main.html' %}
+{% block content %}
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-body" id="info">
+        <div class="container">
+          {% if order.Status == 'delivering'%}
+          <h3>Are you sure you delivered <b>'{{order.Product.BookName}}'</b> to <b>'{{order.Customer.name}}'</b> ?</h3>
+          {% elif order.Status == 'returning'%}
+          <h3>Are you sure <b>'{{order.Customer.name}}'</b> returned <b>'{{order.Product.BookName}}'</b> ?</h3>
+          {% endif %}
+        </div>
+
+        <br>
+        <div class="container">
+          {% if order.Status == 'delivering'%}
+          <a href="{% url 'deliver' order.id %}" class="btn btn-success btn-lg">Delivered</a>
+          {% elif order.Status == 'returning'%}
+          <a href="{% url 'returns' order.id %}" class="btn btn-success btn-lg">Returned</a>
+          {% endif %}
+          <a href="{% url 'chores' %}" class="btn btn-danger btn-lg">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

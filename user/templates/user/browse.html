@@ -1,0 +1,69 @@
+{% extends 'user/main.html' %}
+{% block content %}
+
+{% include 'user/status.html' %}
+<br>
+<div class="row" id="mid">
+  <div class="col-md-4">
+    <div class="card card-body">
+      <form action="" method="get">
+        {% csrf_token %}
+        <label for="BookName">BookName:&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" name="BookName">
+        <br>
+        <label for="AuthorName">AuthorName:</label>
+        <input type="text" name="AuthorName">
+        <br>
+        <label for="Status">Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <select  name="Status">
+          <option value=""></option>
+          <option value="available">Available</option>
+          <option value="unavailable">Unavailable</option>
+        </select>
+        <br>
+        <h4>Genre:</h4>
+        <input type="checkbox" name="Adventure">
+        <label for="Adventure">&nbsp;&nbsp;Adventure&nbsp;&nbsp;&nbsp;</label>
+        <input type="checkbox" name="Comics">
+        <label for="Comics">&nbsp;&nbsp;Comics</label>
+        <br>
+        <input type="checkbox" name="Horror">
+        <label for="Horror">&nbsp;&nbsp;Horror&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="checkbox" name="Fantasy">
+        <label for="Fantasy">&nbsp;&nbsp;Fantasy</label>
+        <br>
+        <input type="checkbox" name="Mystery">
+        <label for="Mystery">&nbsp;&nbsp;Mystery&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="checkbox" name="Mythopoeia">
+        <label for="Mythopoeia">&nbsp;&nbsp;Mythopoeia</label>
+        <br>
+        <input type="checkbox" name="SpyFiction">
+        <label for="SpyFiction">&nbsp;&nbsp;Spy Fiction&nbsp;</label>
+        <input type="checkbox" name="Thriller">
+        <label for="Thriller">&nbsp;&nbsp;Thriller&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br>
+        <input type="submit" value="Search" class="btn btn-sm btn-info">
+
+      </form>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card card-body" >
+      <table class="table table-sm">
+        <tr>
+          <th></th>
+          <th>Book</th>
+          <th>Author</th>
+        </tr>
+        {% for i in books %}
+        <tr {% if i.Status == 'unavailable' %} class="list-group-item-danger"{% endif %}>
+          <td><a href="{% url 'bookinfo' i.id %}" class=" btn btn-sm btn-info">View</a></td>
+          <td>{{i.BookName}}</td>
+          <td>{{i.AuthorName}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

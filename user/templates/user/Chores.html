@@ -1,0 +1,53 @@
+{% extends 'user/main.html' %}
+{% block content %}
+<br>
+<div class="row">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="card card-body">
+        <h3>Deliveries:</h3>
+        <br>
+        <table class="table table-sm">
+          <tr>
+            <th>User</th>
+            <th>Book</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+          {% for i in orders %}
+          <tr {% if i.Customer.DatePayed == 'ITS DUE' %} class="list-group-item-danger"{% endif %}>
+            <td><a href="{% url 'userinfo' i.Customer.id %}">{{i.Customer}}</a></td>
+            <td>{{i.Product}}</td>
+            <td>{{i.date_created}}</td>
+            <td><a href="{% url 'deliverconfirm' i.id%}" class="btn btn-success">Delivered</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-12">
+      <div class="card card-body">
+        <h3>Returns:</h3>
+        <br>
+        <table class="table table-sm">
+          <tr>
+            <th>User</th>
+            <th>Book</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+          {% for i in returns %}
+          <tr {% if i.Customer.DatePayed == 'ITS DUE' %} class="list-group-item-danger"{% endif %}>
+            <td><a href="{% url 'userinfo' i.Customer.id %}">{{i.Customer}}</a></td>
+            <td>{{i.Product}}</td>
+            <td>{{i.date_created}}</td>
+            <td><a href="{% url 'deliverconfirm' i.id%}" class="btn btn-success">Returned</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

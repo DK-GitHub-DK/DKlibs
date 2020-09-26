@@ -1,0 +1,22 @@
+{% extends 'user/main.html' %}
+{% block content %}
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-body" id="info">
+        <div class="container">
+          <h3>Are you sure you want to return <b>'{{order.Product.BookName}}'</b> ?</h3>
+        </div>
+
+        <br>
+        <div class="container">
+          <a href="{% url 'returnconfirm' order.id %}" class="btn btn-success btn-lg">Return</a>
+          <a href="{% url 'mybooks' %}" class="btn btn-danger btn-lg">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

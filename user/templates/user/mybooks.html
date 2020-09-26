@@ -1,0 +1,43 @@
+{% extends 'user/main.html' %}
+{% block content %}
+<br>
+<div class="row">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="card card-body">
+        <h3>Current Books:</h3>
+        <br>
+        <table class="table table-sm">
+          <tr>
+            <th></th>
+            <th>Book</th>
+            <th>Author</th>
+            <th>Recieved On</th>
+            <th>Due After</th>
+            <th></th>
+          </tr>
+          {% for i in orders %}
+          <tr {% if i.due_on == 'ITS DUE' %} class="list-group-item-danger"{% endif %}>
+            <td><a href="{% url 'bookinfo' i.Product.id %}" class=" btn btn-sm btn-info">View</a></td>
+            <td>{{i.Product.BookName}}</td>
+            <td>{{i.Product.AuthorName}}</td>
+            <td>{{i.recieved_on}}</td>
+            <td>{{i.due_on}}</td>
+            <td><a href="{% url 'returnbook' i.id %}" class=" btn btn-sm btn-success">Return</a></td>
+          </tr>
+          {% endfor %}
+          {% for i in incomingbooks%}
+          <tr>
+            <td><a href="{% url 'bookinfo' i.Product.id %}" class=" btn btn-sm btn-info">View</a></td>
+            <td>{{i.Product.BookName}}</td>
+            <td>{{i.Product.AuthorName}}</td>
+            <td>Coming Soon</td>
+            <td>------------</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

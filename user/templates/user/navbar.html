@@ -1,0 +1,40 @@
+<style>
+  .hi{
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a href="{% url 'browse'%}" class="navbar-brand" ><b>BTB</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'browse'%}">Browse</a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'mybooks' %}">My Books</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'activity' request.user.customer.id %}">Activity Log</a>
+      </li>
+      {% if request.user.is_staff %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'chores' %}">Chores</a>
+      </li>
+      {%endif%}
+      {%endif%}
+    </ul>
+  </div>
+  <span class="hi">&nbsp;{{request.user}}&nbsp;</span>
+  {% if request.user.is_authenticated %}
+  <span><a href="{% url 'signout' %}"  class="hi">Log Out</a></span>
+  {% else %}
+  <span><a href="{% url 'signin' %}"  class="hi">Sign In</a></span>
+  <span><a href="{% url 'signup' %}"  class="hi">Sign Up</a></span>
+  {% endif %}
+</nav>

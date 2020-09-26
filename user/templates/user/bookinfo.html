@@ -1,0 +1,47 @@
+{% extends 'user/main.html'%}
+{% block content %}
+<br>
+<div class="row" id="mid">
+  <div class="col-md-4">
+    <div class="card card-body" id="info">
+      <div class="container">
+        {% if book.Image %}
+        <img src="{{book.Image.url}}" height="400", width="350">
+        {% endif %}
+      </div>
+      <br>
+      {% if book.PDF %}
+      <a href="{{book.PDF.url}}" class="btn btn-lg btn-secondary btn-block">Download PDF</a>
+      {% else %}
+      <a href="#" class="btn btn-lg btn-danger btn-block">NO PDF</a>
+      {% endif %}
+      {% if book.Status == 'available' %}
+      <a href="{% url 'orderbook' book.id %}" class="btn btn-lg btn-primary btn-block">Book Now</a>
+      {% else %}
+      <a href="" class="btn btn-lg btn-danger btn-block">UNAVAILABLE</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card card-body" id="info">
+      <div class="text">
+        <p><b>Book Name :</b> &nbsp;&nbsp;&nbsp;&nbsp;{{book.BookName}}</p>
+        <p><b>Author Name :</b> &nbsp;{{book.AuthorName}}</p>
+        <b>Genre:&nbsp;&nbsp;&nbsp;</b>
+        <ul>
+          {% for i in book.Genre.all%}
+          <li>{{i}}</li>
+          {% endfor %}
+        </ul>
+        <p><b>Age :&nbsp;&nbsp;&nbsp;</b>{{book.Age}}</p>
+        <b>Book Back Description:</b>
+        <br>
+        <small><p>{{book.Description}}</p></small>
+        <p><b>Note :&nbsp;&nbsp;&nbsp;</b>{{book.Note}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'user/main.html'%}
+{% block content %}
+<br>
+<div class="container">
+  <div class="card card-body" id="info">
+    <div class="text">
+      <p><b>Name:</b>&nbsp;&nbsp;{{user.name}}</p>
+      <p><b>Address:</b>&nbsp;&nbsp;{{user.Address}}</p>
+      <p><b>Phone No.</b>&nbsp;&nbsp;{{user.PhoneNo}}</p>
+      <p><b>Email:</b>&nbsp;&nbsp;{{user.email}}</p>
+      <p><b>Last Payed On:</b>&nbsp;&nbsp;{{user.DatePayed}}</p>
+      <p><b>Pay Date:</b>&nbsp;&nbsp;{{user.Paydate}}</p>
+      <a href="{% url 'activity' user.id %}" class="btn btn-info">Activity Log</a>
+      {% if user.Paydate == 'ITS DUE' %}
+      <a href="{% url 'pay' user.id %}" class="btn btn-success">PAYED</a>
+      {%endif%}
+    </div>
+  </div>
+</div>
+{% endblock %}

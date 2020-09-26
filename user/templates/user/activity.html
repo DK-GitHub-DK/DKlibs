@@ -1,0 +1,40 @@
+{% extends 'user/main.html'%}
+{% block content %}
+<br>
+<div class="row">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="card card-body">
+        <br>
+        <table class="table table-sm">
+          <tr>
+            <th></th>
+            <th>Book</th>
+            <th>Order Date</th>
+            <th>Recieved Date</th>
+            <th>Returned Date</th>
+          </tr>
+          {% for i in orders %}
+          <tr>
+
+            <td><a href="{% url 'bookinfo' i.Product.id %}" class=" btn btn-sm btn-info">View</a></td>
+            <td>{{i.Product}}</td>
+            <td>{{i.date_created}}</td>
+            {% if i.recieved_on is not None %}
+            <td>{{i.recieved_on}}</td>
+            {%else%}
+            <td>-----------------</td>
+            {%endif%}
+            {% if i.returned_on is not None %}
+            <td>{{i.returned_on}}</td>
+            {%else%}
+            <td>-----------------</td>
+            {%endif%}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
