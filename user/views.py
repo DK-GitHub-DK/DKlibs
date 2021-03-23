@@ -52,6 +52,14 @@ def browse(request):
     if Fantasy == 'on':
         books = books.filter(Genre = 7)
 
+    Play = request.GET.get('Play')
+    if Play == 'on':
+        books = books.filter(Genre = 15)
+
+    HumourComedy = request.GET.get('Humour/Comedy')
+    if HumourComedy == 'on':
+        books = books.filter(Genre = 16)
+
     if BookName != '' and BookName is not None:
         books = books.filter(BookName__icontains= BookName)
 

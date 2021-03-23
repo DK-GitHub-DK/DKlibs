@@ -26,7 +26,7 @@ SECRET_KEY = 'funnkl+d2$m!dbqhi2i_giz250k#w7u)pp1x(*qqzqs_md%d9d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['dkonlinelibrary.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['www.bookthembooks.com']
 
 
 # Application definition
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.security.SecurityMiddleware'
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
